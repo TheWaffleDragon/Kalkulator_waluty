@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang='pl'>
+<body>
+<head>
+    <meta charset="utf-8">
+    <title>Kalkulator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<h1>Kalkulator</h1>
+
+<form action="{{url_for('calc')}}", method="POST">    
+  <div>
+    <label for="currency">Wybierz Walutę:</label>
+      <select class="banner" name="currencyType" id="currencyType">
+        <option value="USD">USD</option>
+        <option value="AUD">AUD</option>
+        <option value="CAD">CAD</option>
+        <option value="EUR">EUR</option>
+        <option value="HUF">HUF</option>
+        <option value="CHF">CHF</option>
+        <option value="GBP">GBP</option>
+        <option value="JPY">JPY</option>
+        <option value="CZK">CZK</option>
+        <option value="DKK">DKK</option>
+        <option value="NOK">NOK</option>
+        <option value="SEK">SEK</option>
+        <option value="XDR">XDR</option>
+      </select>
+  </div><br>
+  <div>
+    <label>Wpisz ktotę do wymiany:</label>
+    <input class="banner" type="number" name="currencyAmount" placeholder="" required/>
+  </div> 
+  <div>    
+      <input type="submit" value="Olicz"/>
+  </div>
+</form>
+
+<div>
+  <label>Kupisz:</label>
+  <input class="banner" type="text" placeholder="Wynik" value={{result}}>
+</div> 
+
+</body>
+</html>

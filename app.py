@@ -1,18 +1,27 @@
-from flask import Flask,render_template
+from flask import Flask,render_template, request, url_for
 
 import csv
 
 
 app = Flask(__name__)
 
-@app.route('/calc')
+@app.route("/Kalkulator")  
+def simple(): 
+    return render_template("calc.html") 
 
 
-def me():
-    return render_template("me.html")
+@app.route("/calc", methods=["POST"])     
+def calc():
+    currency_type = request.form["currencyType"] 
+    currency_amount = request.form["currencyAmount"] 
+    with open('rates.csv', newline='') as csvfile:
+        reader = csv.DictReader(csvfile, delimiter =";") 
+        for row in reader:
+            if row['code'] == currency_type:
+                course = row['bid']
+                result=float(course)*float(currency_amount)
+                return render_template("calc.html", result=result) 
+     
 
-
-import requests
-
-response = requests.get("http://api.nbp.pl/api/exchangerates/tables/C?format=json")
-data = response.json()
+if __name__ == '__main__':  
+    app.run(debug=True) 
