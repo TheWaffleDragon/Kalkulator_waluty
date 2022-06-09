@@ -1,4 +1,4 @@
-from flask import Flask,render_template, request, url_for
+from flask import Flask,render_template, request
 
 import csv
 
@@ -6,7 +6,7 @@ import csv
 app = Flask(__name__)
 
 @app.route("/Kalkulator")  
-def simple(): 
+def form(): 
     return render_template("calc.html") 
 
 
@@ -19,7 +19,7 @@ def calc():
         for row in reader:
             if row['code'] == currency_type:
                 course = row['bid']
-                result=float(course)*float(currency_amount)
+                result=float(currency_amount)/float(course)
                 return render_template("calc.html", result=result) 
      
 
